@@ -38,6 +38,14 @@
 
 <div class="row">
     <div class="col-md-4">
+        <h2>News on TAL</h2>
+        <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
+        <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
+        <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
+        <tal-app-endpoints environment-name="Dev CI" environment-url="http://10.10.32.46/" app-id="newsontal"></tal-app-endpoints>
+    </div>
+
+    <div class="col-md-4">
         <h2>Sport HTML Hogwarts</h2>
         <tal-app-endpoints environment-name="Gryffindor" environment-url="http://10.10.32.24/" app-id="sprtiptvjs"></tal-app-endpoints>
         <tal-app-endpoints environment-name="Slytherin" environment-url="http://10.10.32.27/" app-id="sprtiptvjs"></tal-app-endpoints>
@@ -96,13 +104,18 @@ jenkins-jobs > a {
     }
 
     JenkinsJobComponent.on('preRenderStep', function(instance) {
-      var list = instance.data.jobs;
-      if (list) {
-        for (key in list) {
-          var item = list[key];
-          item.alertType = instance.selectAlertType(item.color);
-          item.url = instance.data.service + '/job/' + item.name;
+      try {
+        var list = instance.data.jobs;
+        if (list) {
+          for (key in list) {
+            var item = list[key];
+            item.alertType = instance.selectAlertType(item.color);
+            item.url = instance.data.service + '/job/' + item.name;
+          }
         }
+      }
+      catch(e) {
+        // do nothing
       }
     });
   });
