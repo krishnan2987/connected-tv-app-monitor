@@ -1,1 +1,1 @@
-sudo nohup node server.js &
+sudo pm2 start server.js
