@@ -45,3 +45,65 @@
         <tal-app-endpoints environment-name="Ravenclaw" environment-url="http://10.10.32.42/" app-id="sprtiptvjs"></tal-app-endpoints>
     </div>
 </div>
+
+
+<h2>http://tal-launcher.bbc.co.uk/</h2>
+<status-button glyph-icon="flag" data-url="http://tal-launcher.int.tools.bbc.co.uk/config" data-contains="int">TAL Launcher Int Config</status-button>
+
+<status-button glyph-icon="flag" data-url="http://tal-launcher.test.tools.bbc.co.uk/config" data-contains="test">TAL Launcher Test Config</status-button>
+
+<status-button glyph-icon="flag" data-url="http://tal-launcher.tools.bbc.co.uk/config" data-contains="live">TAL Launcher Live Config</status-button>
+
+
+<h2>http://www.bbc.co.uk/tal-launcher/</h2>
+
+<status-button glyph-icon="flag" data-url="http://www.int.bbc.co.uk/tal-launcher/config" data-contains="int">TAL Launcher Int Config</status-button>
+
+<status-button glyph-icon="flag" data-url="http://www.test.bbc.co.uk/tal-launcher/config" data-contains="test">TAL Launcher Test Config</status-button>
+
+<status-button glyph-icon="flag" data-url="http://www.bbc.co.uk/tal-launcher/config" data-contains="live">TAL Launcher Live Config</status-button>
+
+<h2>Jenkins Jobs</h2>
+
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10"></jenkins-jobs>
+
+<template for="jenkins-jobs">
+  {{#each jobs}}
+    <a href="{{url}}">
+      <button class="btn btn-{{alertType}}">{{name}} : {{color}}</button>
+    </a>
+  {{/each}}
+</template>
+
+<style for="jenkins-jobs">
+jenkins-jobs > a {
+  margin: 5px 0;
+  display: inline-block;
+  text-decoration: none;
+}
+</style>
+
+<script type="text/javascript" for="jenkins-jobs">
+  $(function() {
+    var JenkinsJobComponent = Component.configure('jenkins-jobs');
+
+    JenkinsJobComponent.prototype.selectAlertType = function(jenkinsColor) {
+      return ({
+        "red": 'danger',
+        "blue": 'success',
+        "blue_anime": 'info'
+      })[jenkinsColor] || 'danger';
+    }
+
+    JenkinsJobComponent.on('preRenderStep', function(instance) {
+      var list = instance.data.jobs;
+      if (list) {
+        for (key in list) {
+          var item = list[key];
+          item.alertType = instance.selectAlertType(item.color);
+          item.url = instance.data.service + '/job/' + item.name;
+        }
+      }
+    });
+  });
+</script>
