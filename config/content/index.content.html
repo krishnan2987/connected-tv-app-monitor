@@ -105,7 +105,7 @@ jenkins-jobs > a {
 
     JenkinsJobComponent.on('preRenderStep', function(instance) {
       try {
-        var list = instance.data.jobs;
+        var list = instance.jobs;
         if (list) {
           for (key in list) {
             var item = list[key];
