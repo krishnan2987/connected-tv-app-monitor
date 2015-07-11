@@ -8,16 +8,17 @@ npm install
 node server.js
 ```
 
-To run as background process on a linux server, using PM2 to manage the process:
+To run as background process on a Linux or Windows server, using PM2 to manage the process:
 ```sh
 npm install pm2 -g
 ./start-server.sh
 ```
+
 And to monitor and restart:
 ```sh
 pm2 status
 pm2 monit
-pm2 restart server
+pm2 restart "Connected TV App Monitor"
 ```
 
 To kill the background process:
