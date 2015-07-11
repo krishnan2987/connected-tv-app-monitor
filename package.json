@@ -1,6 +1,6 @@
 {
   "name": "ctv-product-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A product monitor for connected tv products.",
   "main": "server.js",
   "scripts": {
