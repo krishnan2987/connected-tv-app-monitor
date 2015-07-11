@@ -1,6 +1,6 @@
 {
   "name": "ctv-product-monitor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A product monitor for connected tv products.",
   "main": "server.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "John Beech",
   "license": "Apache V2",
   "dependencies": {
-    "product-monitor": "^1.8.8",
+    "product-monitor": "^1.8.9",
     "request": "*"
   }
 }
