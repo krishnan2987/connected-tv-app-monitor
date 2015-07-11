@@ -1,2 +1,1 @@
-#!/bin/bash
-sudo pm2 kill
+pm2 delete "Connected TV App Monitor"
