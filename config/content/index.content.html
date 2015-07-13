@@ -4,15 +4,18 @@
 
 <h2>http://tal-launcher.int.tools.bbc.co.uk/</h2>
 <tal-app-endpoints environment-name="Int" environment-url="http://tal-launcher.int.tools.bbc.co.uk/" app-id="tal-launcher">
-  <status-button glyph-icon="flag" data-url="http://tal-launcher.int.tools.bbc.co.uk/tal-launcher/talonConfig" data-contains="int">TAL Launcher Int Config</status-button>
+  <status-button glyph-icon="eye-open" data-url="{{environment-url}}tal-launcher/talonConfig" data-contains="int">Talon Config</status-button>
+  <status-button glyph-icon="flag" data-url="{{environment-url}}tal-launcher/talonConfig/availability" data-contains="available">Talon Config Availability</status-button>
 </tal-app-endpoints>
 
 <tal-app-endpoints environment-name="Test" environment-url="http://tal-launcher.test.tools.bbc.co.uk/" app-id="tal-launcher">
-  <status-button glyph-icon="flag" data-url="http://tal-launcher.test.tools.bbc.co.uk/tal-launcher/talonConfig" data-contains="test">TAL Launcher Test Config</status-button>
+  <status-button glyph-icon="flag" data-url="{{environment-url}}tal-launcher/talonConfig" data-contains="test">Talon Config</status-button>
+  <status-button glyph-icon="flag" data-url="{{environment-url}}tal-launcher/talonConfig/availability" data-contains="available">Talon Config Availability</status-button>
 </tal-app-endpoints>
 
 <tal-app-endpoints environment-name="Live" environment-url="http://tal-launcher.tools.bbc.co.uk/" app-id="tal-launcher">
-  <status-button glyph-icon="flag" data-url="http://tal-launcher.tools.bbc.co.uk/tal-launcher/talonConfig" data-contains="live">TAL Launcher Live Config</status-button>
+  <status-button glyph-icon="flag" data-url="{{environment-url}}tal-launcher/talonConfig" data-contains="live">Talon Config</status-button>
+  <status-button glyph-icon="flag" data-url="{{environment-url}}tal-launcher/talonConfig/availability" data-contains="available">Talon Config Availability</status-button>
 </tal-app-endpoints>
 
 
@@ -27,6 +30,12 @@
 <h2>Connected TV Build Jobs</h2>
 
 <jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10"></jenkins-jobs>
+
+<style>
+tal-app-endpoints > p > status-button:first-child > a > button {
+    width: 120px;
+}
+</style>
 
 <template for="jenkins-jobs">
   {{#each jobs}}
