@@ -41,7 +41,7 @@
 <template for="jenkins-jobs">
     {{#each jobs}}
     <a href="{{url}}">
-        <button class="btn btn-{{alertType}}">{{name}} : {{color}}</button>
+        <button class="btn btn-{{alertType}}"><span class="glyphicon glyphicon-{{glyphIcon}}"></span> {{name}} : {{color}}</button>
     </a>
     {{/each}}
 </template>
@@ -62,8 +62,20 @@
             return ({
                 "red": 'danger',
                 "blue": 'success',
-                "blue_anime": 'info'
+                "blue_anime": 'info',
+                "red_anime": 'warning',
+                "notbuilt": 'primary'
             })[jenkinsColor] || 'danger';
+        }
+
+        JenkinsJobComponent.prototype.selectGlyphIcon = function(jenkinsColor) {
+            return ({
+                "red": 'thumbs-down',
+                "blue": 'thumbs-up',
+                "blue_anime": 'cog',
+                "red_anime": 'cog',
+                "notbuilt": 'heart-empty'
+            })[jenkinsColor] || 'fire';
         }
 
         JenkinsJobComponent.on('preRenderStep', function(instance) {
@@ -72,6 +84,7 @@
                 if (list) {
                     for (key in list) {
                         var item = list[key];
+                        item.glyphIcon = instance.selectGlyphIcon(item.color);
                         item.alertType = instance.selectAlertType(item.color);
                         item.url = instance.data.service + '/job/' + item.name;
                     }
