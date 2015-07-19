@@ -13,7 +13,7 @@
   "author": "John Beech",
   "license": "Apache V2",
   "dependencies": {
-    "product-monitor": "^1.8.14",
-    "request": "*"
+    "product-monitor": "^1.8.17",
+    "request": "2.58.0"
   }
 }
