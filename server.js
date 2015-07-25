@@ -6,5 +6,8 @@ var server = monitor({
   "productInformation": {
     "title": "Connected TV Product Monitor",
   },
-  "userContentPath": "config"
+  "userContentPath": "config",
+  "npmUpdate": {
+    "disableUpdates": true
+  }
 });
