@@ -1,0 +1,38 @@
+<jumbotron>
+    <h1>Product Monitor for Connected TV</h1>
+</jumbotron>
+
+<h2>TAL Launcher on Localhost</h2>
+
+<tal-app-endpoints environment-name="Local Developer" environment-url="http://localhost:7080/" app-id="tal-launcher">
+    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="dev">Server Config</status-button>
+    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="BBC Config Updater">Config Availability</status-button>
+</tal-app-endpoints>
+
+<!-- Templates -->
+
+<!-- Template for TAL App Endpoints -->
+
+<template for="tal-app-endpoints" brand="google" model="chrome">
+    <p>
+        <status-button data-url="{{environment-url}}{{app-id}}/?brand={{brand}}%26model={{model}}" data-contains="%3Chtml">{{environment-name}} Index</status-button>
+        <status-button data-url="{{environment-url}}{{app-id}}/ait/launch?brand={{brand}}%26model={{model}}" data-contains="%3Cmhp:URLBase">AIT</status-button>
+        <status-button data-url="{{environment-url}}{{app-id}}/ait/issupported?brand={{brand}}%26model={{model}}" data-contains="{{app-id}}">isSupported</status-button>
+        {{content}}
+    </p>
+</template>
+
+<style for="tal-app-endpoints">
+    tal-app-endpoints > h3 > name {
+        display: inline-block;
+        min-width: 60px;
+        overflow: hidden;
+    }
+</style>
+
+<style>
+    tal-app-endpoints > p > status-button:first-child > a > button {
+        min-width: 120px;
+        text-align: left;
+    }
+</style>

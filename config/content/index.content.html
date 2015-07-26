@@ -1,25 +1,26 @@
 <jumbotron>
-    <h1>Product Monitor for Connected TV</h1>
+  <h1>Product Monitor for Connected TV</h1>
 </jumbotron>
 
-<h2>http://tal-launcher.{env}.tools.bbc.co.uk/</h2>
+<h2>TAL Launcher on AWS</h2>
+
 <tal-app-endpoints environment-name="Int" environment-url="http://tal-launcher.int.tools.bbc.co.uk/" app-id="tal-launcher">
-    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="int">Server Config</status-button>
-    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="BBC Config Updater">S3 Availability</status-button>
+  <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="int">Server Config</status-button>
+  <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="BBC Config Updater">S3 Availability</status-button>
 </tal-app-endpoints>
 
 <tal-app-endpoints environment-name="Test" environment-url="http://tal-launcher.test.tools.bbc.co.uk/" app-id="tal-launcher">
-    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="test">Server Config</status-button>
-    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="BBC Config Updater">S3 Availability</status-button>
+  <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="test">Server Config</status-button>
+  <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="BBC Config Updater">S3 Availability</status-button>
 </tal-app-endpoints>
 
 <tal-app-endpoints environment-name="Live" environment-url="http://tal-launcher.tools.bbc.co.uk/" app-id="tal-launcher">
-    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="live">Server Config</status-button>
-    <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="BBC Config Updater">S3 Availability</status-button>
+  <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="live">Server Config</status-button>
+  <status-button data-url="{{environment-url}}tal-launcher/serverConfig" data-contains="BBC Config Updater">S3 Availability</status-button>
 </tal-app-endpoints>
 
 
-<h2>http://www.{env}.bbc.co.uk/tal-launcher/serverConfig</h2>
+<h2>TAL Launcher on bbc.co.uk/tal-launcher/ URLs</h2>
 
 <status-button glyph-icon="flag" data-url="http://www.int.bbc.co.uk/tal-launcher/serverConfig" data-contains="int">Int</status-button>
 
@@ -29,131 +30,178 @@
 
 <h2>Connected TV Build Jobs</h2>
 
-<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10"></jenkins-jobs>
+<h3>TAL Launcher Jobs</h3>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(build|library).*(tal-launcher)" exclude="(config|promote|tests)" label="Build jobs"></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(tal-launcher)" exclude="(build|library|config|integration-tests|sanity-tests)" label="Deployment"></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(integration-tests|sanity-tests).*(tal-launcher)" exclude="(build|library|config)" label="Tests"></jenkins-jobs>
 
-<style>
-    tal-app-endpoints > p > status-button:first-child > a > button {
-        min-width: 120px;
-        text-align: left;
-    }
-</style>
+<h3>TAL Launcher Configs</h3>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(configs).*(tal-launcher)" label="Configs"></jenkins-jobs>
 
-<template for="jenkins-jobs">
-    {{#each jobs}}
-    <a href="{{url}}">
-        <button class="btn btn-{{alertType}}"><span class="glyphicon glyphicon-{{glyphIcon}}"></span> {{name}} : {{color}}</button>
-    </a>
-    {{/each}}
-</template>
+<h3>Other Jobs</h3>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" exclude="(tal-launcher)"></jenkins-jobs>
 
-<style for="jenkins-jobs">
-    jenkins-jobs > a {
-        margin: 5px 0;
-        display: inline-block;
-        text-decoration: none;
-    }
-</style>
+<div class="row">
+  <div class="col-md-4">
+    <h2>Red Button+</h2>
+    <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="redbuttonhtml"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="redbuttonhtml"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="redbuttonhtml"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Dev CI" environment-url="http://10.10.32.46/" app-id="redbuttonhtml"></tal-app-endpoints>
+  </div>
 
-<script type="text/javascript" for="jenkins-jobs">
-    $(function() {
-        var JenkinsJobComponent = Component.configure('jenkins-jobs');
+  <div class="col-md-4">
+    <h2>Music Events HTML</h2>
+    <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="musiceventshtml"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="musiceventshtml"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="musiceventshtml"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Dev CI" environment-url="http://10.10.32.46/" app-id="musiceventshtml"></tal-app-endpoints>
+  </div>
 
-        JenkinsJobComponent.prototype.selectAlertType = function(jenkinsColor) {
-            return ({
-                "red": 'danger',
-                "blue": 'success',
-                "blue_anime": 'info',
-                "red_anime": 'warning',
-                "notbuilt": 'primary'
-            })[jenkinsColor] || 'danger';
-        }
+  <div class="col-md-4">
+    <h2>Sport HTML</h2>
+    <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="sprtiptvjs"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="sprtiptvjs"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="sprtiptvjs"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Hogwarts" environment-url="http://10.10.32.8/" app-id="sprtiptvjs"></tal-app-endpoints>
+  </div>
+</div>
 
-        JenkinsJobComponent.prototype.selectGlyphIcon = function(jenkinsColor) {
-            return ({
-                "red": 'thumbs-down',
-                "blue": 'thumbs-up',
-                "blue_anime": 'cog',
-                "red_anime": 'cog',
-                "notbuilt": 'heart-empty'
-            })[jenkinsColor] || 'fire';
-        }
+<div class="row">
+  <div class="col-md-4">
+    <h2>News on TAL</h2>
+    <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Dev CI" environment-url="http://10.10.32.46/" app-id="newsontal"></tal-app-endpoints>
+  </div>
 
-        JenkinsJobComponent.on('preRenderStep', function(instance) {
-            try {
-                var list = instance.jobs;
-                if (list) {
-                    for (key in list) {
-                        var item = list[key];
-                        item.glyphIcon = instance.selectGlyphIcon(item.color);
-                        item.alertType = instance.selectAlertType(item.color);
-                        item.url = instance.data.service + '/job/' + item.name;
-                    }
-                }
-            } catch (e) {
-                // do nothing
-            }
-        });
-    });
-</script>
+  <div class="col-md-4">
+    <h2>Sport HTML Hogwarts</h2>
+    <tal-app-endpoints environment-name="Gryffindor" environment-url="http://10.10.32.24/" app-id="sprtiptvjs"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Slytherin" environment-url="http://10.10.32.27/" app-id="sprtiptvjs"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Hufflepuff" environment-url="http://10.10.32.28/" app-id="sprtiptvjs"></tal-app-endpoints>
+    <tal-app-endpoints environment-name="Ravenclaw" environment-url="http://10.10.32.42/" app-id="sprtiptvjs"></tal-app-endpoints>
+  </div>
+</div>
+
+<!-- Templates -->
+
+<!-- Template for TAL App Endpoints -->
 
 <template for="tal-app-endpoints" brand="google" model="chrome">
-    <p>
-        <status-button data-url="{{environment-url}}{{app-id}}/?brand={{brand}}%26model={{model}}" data-contains="%3Chtml">{{environment-name}} Index</status-button>
-        <status-button data-url="{{environment-url}}{{app-id}}/ait/launch?brand={{brand}}%26model={{model}}" data-contains="%3Cmhp:URLBase">AIT</status-button>
-        <status-button data-url="{{environment-url}}{{app-id}}/ait/issupported?brand={{brand}}%26model={{model}}" data-contains="{{app-id}}">isSupported</status-button>
-        {{content}}
-    </p>
+  <p>
+    <status-button data-url="{{environment-url}}{{app-id}}/?brand={{brand}}%26model={{model}}" data-contains="%3Chtml">{{environment-name}} Index</status-button>
+    <status-button data-url="{{environment-url}}{{app-id}}/ait/launch?brand={{brand}}%26model={{model}}" data-contains="%3Cmhp:URLBase">AIT</status-button>
+    <status-button data-url="{{environment-url}}{{app-id}}/ait/issupported?brand={{brand}}%26model={{model}}" data-contains="{{app-id}}">isSupported</status-button>
+    {{content}}
+  </p>
 </template>
 
 <style for="tal-app-endpoints">
-    tal-app-endpoints > h3 > name {
-        display: inline-block;
-        min-width: 60px;
-        overflow: hidden;
-    }
+  tal-app-endpoints > h3 > name {
+    display: inline-block;
+    min-width: 60px;
+    overflow: hidden;
+  }
 </style>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Red Button+</h2>
-        <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="redbuttonhtml"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="redbuttonhtml"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="redbuttonhtml"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Dev CI" environment-url="http://10.10.32.46/" app-id="redbuttonhtml"></tal-app-endpoints>
-    </div>
+<style>
+  tal-app-endpoints > p > status-button:first-child > a > button {
+    min-width: 120px;
+    text-align: left;
+  }
+</style>
 
-    <div class="col-md-4">
-        <h2>Music Events HTML</h2>
-        <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="musiceventshtml"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="musiceventshtml"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="musiceventshtml"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Dev CI" environment-url="http://10.10.32.46/" app-id="musiceventshtml"></tal-app-endpoints>
-    </div>
+<!-- Template for Jenkins Jobs -->
 
-    <div class="col-md-4">
-        <h2>Sport HTML</h2>
-        <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="sprtiptvjs"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="sprtiptvjs"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="sprtiptvjs"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Hogwarts" environment-url="http://10.10.32.8/" app-id="sprtiptvjs"></tal-app-endpoints>
-    </div>
-</div>
+<template for="jenkins-jobs">
+  {{#if label}}
+  <label class="btn btn-default disabled">
+    <icon>cog</icon> {{label}}</label>
+  {{/if}} {{#each jobs}}
+  <a href="{{url}}">
+    <button class="btn btn-{{alertType}}">
+      <span class="glyphicon glyphicon-{{glyphIcon}} jenkins-{{color}}"></span> {{name}}</button>
+  </a>
+  {{/each}}
+</template>
 
+<style for="jenkins-jobs">
+  jenkins-jobs {
+    display: block;
+  }
+  jenkins-jobs > a {
+    margin: 5px 0;
+    display: inline-block;
+    text-decoration: none;
+  }
+  jenkins-jobs > label.btn {
+    min-width: 120px;
+    text-align: left;
+  }
+</style>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>News on TAL</h2>
-        <tal-app-endpoints environment-name="Live" environment-url="http://www.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Stage" environment-url="http://www.stage.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Test" environment-url="http://www.test.bbc.co.uk/" app-id="newsontal"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Dev CI" environment-url="http://10.10.32.46/" app-id="newsontal"></tal-app-endpoints>
-    </div>
+<script type="text/javascript" for="jenkins-jobs">
+  $(function() {
+    var JenkinsJobComponent = Component.configure('jenkins-jobs');
 
-    <div class="col-md-4">
-        <h2>Sport HTML Hogwarts</h2>
-        <tal-app-endpoints environment-name="Gryffindor" environment-url="http://10.10.32.24/" app-id="sprtiptvjs"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Slytherin" environment-url="http://10.10.32.27/" app-id="sprtiptvjs"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Hufflepuff" environment-url="http://10.10.32.28/" app-id="sprtiptvjs"></tal-app-endpoints>
-        <tal-app-endpoints environment-name="Ravenclaw" environment-url="http://10.10.32.42/" app-id="sprtiptvjs"></tal-app-endpoints>
-    </div>
-</div>
+    JenkinsJobComponent.prototype.selectAlertType = function(jenkinsColor) {
+      return ({
+        "red": 'danger',
+        "blue": 'success',
+        "blue_anime": 'info',
+        "red_anime": 'warning',
+        "notbuilt": 'primary'
+      })[jenkinsColor] || 'danger';
+    }
+
+    JenkinsJobComponent.prototype.selectGlyphIcon = function(jenkinsColor) {
+      return ({
+        "red": 'thumbs-down',
+        "blue": 'thumbs-up',
+        "blue_anime": 'cog',
+        "red_anime": 'cog',
+        "notbuilt": 'heart-empty'
+      })[jenkinsColor] || 'fire';
+    }
+
+    JenkinsJobComponent.on('preRenderStep', function(instance) {
+      rewriteItems(instance);
+    });
+
+    function rewriteItems(instance) {
+      var include = instance.include || false;
+      var exclude = instance.exclude || false;
+
+      try {
+        var list = instance.jobs;
+        if (list) {
+          // Map Jenkins colours to Bootstrap colours
+          for (key in list) {
+            var item = list[key];
+            item.glyphIcon = instance.selectGlyphIcon(item.color);
+            item.alertType = instance.selectAlertType(item.color);
+            item.url = instance.data.service + '/job/' + item.name;
+          }
+          // Include jobs jobs by name based on an optional RegExp string
+          if (include) {
+            console.log('Including', include);
+            instance.jobs = instance.jobs.filter(function(item) {
+              return (new RegExp(include, 'i')).test(item.name);
+            });
+          }
+          // Exclude jobs jobs by name based on an optional RegExp string
+          if (exclude) {
+            console.log('Excluding', include);
+            instance.jobs = instance.jobs.filter(function(item) {
+              return !(new RegExp(exclude, 'i')).test(item.name);
+            });
+          }
+        }
+      } catch (e) {
+        // do nothing
+      }
+    }
+  });
+</script>
