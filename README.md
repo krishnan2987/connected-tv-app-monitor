@@ -3,7 +3,7 @@ A product monitor to check the health of connected TV products and services.
 
 To run locally:
 ```
-git clone git@github.com:johnbeech/connected-tv-app-monitor.git
+git clone git@github.com:connected-tv/connected-tv-app-monitor.git
 npm install
 node server.js
 ```
