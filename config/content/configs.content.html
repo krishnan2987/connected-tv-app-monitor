@@ -1,0 +1,30 @@
+<h1>Config Monitoring</h1>
+
+<h2>TAL Launcher Configs</h2>
+<check-devices url="http://www.int.bbc.co.uk/tal-launcher/">TAL Launcher on Int</check-devices>
+<check-devices url="http://www.test.bbc.co.uk/tal-launcher/">TAL Launcher on Test</check-devices>
+<check-devices url="http://www.bbc.co.uk/tal-launcher/">TAL Launcher on Live</check-devices>
+
+<h2>CATAL Configs</h2>
+<check-devices url="http://www.int.bbc.co.uk/catal/">CATAL on Int</check-devices>
+<check-devices url="http://www.test.bbc.co.uk/catal/">CATAL on Test</check-devices>
+<check-devices url="http://www.bbc.co.uk/catal/">CATAL on Live</check-devices>
+
+<!-- Templates -->
+
+<template for="check-devices">
+    <div class="alert alert-info">
+        <device brand="google" model="chrome" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+        <device brand="samsung" model="pe5" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+        <device brand="samsung" model="pe7" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+        <device brand="panasonic" model="tv_2014_midrange" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+        <device brand="humax" model="pvr_2013" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+        <device brand="sony" model="hbbtv_2014" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+        <device brand="sharp" model="tv_2013_highend" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+        <device brand="vestel" model="tv_2015_midrange" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+    </div>
+</template>
+
+<template for="device">
+    <status-button data-url="{{url}}?brand={{brand}}%26model={{model}}" data-content-type="{{mimetype}}" data-contains="{{page-strategy}}">{{brand}} {{model}}</status-button>
+</template>
