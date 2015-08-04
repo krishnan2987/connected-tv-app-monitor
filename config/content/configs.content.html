@@ -13,18 +13,20 @@
 <!-- Templates -->
 
 <template for="check-devices">
-    <div class="alert alert-info">
-        <device brand="google" model="chrome" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-        <device brand="samsung" model="pe5" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-        <device brand="samsung" model="pe7" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-        <device brand="panasonic" model="tv_2014_midrange" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-        <device brand="humax" model="pvr_2013" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-        <device brand="sony" model="hbbtv_2014" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-        <device brand="sharp" model="tv_2013_highend" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-        <device brand="vestel" model="tv_2015_midrange" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
-    </div>
+  <h3>{{content}}</h3>
+  <h4>{{url}}</h4>
+  <div class="alert alert-info">
+    <device brand="google" model="chrome" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+    <device brand="vestel" model="tv_2013" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+    <device brand="sony" model="hbbtv_2014" mimetype="application/vnd.hbbtv.xhtml%2Bxml" page-strategy="hbbtv" url="{{url}}"></device>
+    <device brand="samsung" model="pe5" mimetype="text/html" page-strategy="samsungmaple" url="{{url}}"></device>
+    <device brand="samsung" model="pe7" mimetype="text/html" page-strategy="samsungmaple" url="{{url}}"></device>
+    <device brand="panasonic" model="tv_2014_midrange" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="humax" model="hdr_1000s" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="seiki" model="tv_2014" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+  </div>
 </template>
 
 <template for="device">
-    <status-button data-url="{{url}}?brand={{brand}}%26model={{model}}" data-content-type="{{mimetype}}" data-contains="{{page-strategy}}">{{brand}} {{model}}</status-button>
+  <status-button data-url="{{url}}?brand={{brand}}%26model={{model}}" data-content-type="{{mimetype}}" data-contains="%22{{page-strategy}}%22">{{brand}} {{model}}</status-button>
 </template>

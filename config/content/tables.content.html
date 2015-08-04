@@ -1,8 +1,5 @@
 <h1>Data Tables</h1>
 
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-
 <template for="device-configs">
   {{#each data}}
   <device-config brand="{{brand}}" model="{{model}}" page-strategy="{{pageStrategy}}">
@@ -30,20 +27,23 @@
 </table>
 
 <script type="text/javascript">
-  $(document).ready(function() {
+  function doTables() {
     $('#empTable').dataTable({
-      "ajax": "/api/deviceConfigData",
-      "columns": [{
-        "data": "brand"
-      }, {
-        "data": "model"
-      }, {
-        "data": "pageStrategy"
-      }, {
-        "data": "modules.modifiers"
-      }]
-    });
-  });
+        "ajax": "/api/deviceConfigData",
+        "columns": [{
+          "data": "brand"
+        }, {
+          "data": "model"
+        }, {
+          "data": "pageStrategy"
+        }, {
+          "data": "modules.modifiers"
+        }]
+      });
+  }
 </script>
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
+<script onload="doTables()" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 <device-configs data-source-url="/api/deviceConfigData"></device-configs>
