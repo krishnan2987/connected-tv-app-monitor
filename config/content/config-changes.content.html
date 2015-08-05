@@ -1,0 +1,44 @@
+<h1>Configs Being Released</h1>
+
+<h2>
+    <jira>CHANGE-1467</jira>
+</h2>
+
+<h3>Sport HTML</h3>
+<device-ait>/sprtiptvjs/ait/issupported?brand=lg%26model=tv_2015_lm14alite</device-ait>
+<device-ait>/sprtiptvjs/ait/issupported?brand=lg%26model=tv_2015_lm14a</device-ait>
+<device-ait>/sprtiptvjs/ait/issupported?brand=vestel%26model=tv_2015_midrange</device-ait>
+<device-ait>/sprtiptvjs/ait/issupported?brand=nowtv%26model=box_v2</device-ait>
+
+<h3>Music Events HTML</h3>
+<device-ait>/musiceventshtml/ait/issupported?brand=lg%26model=tv_2015_lm14alite</device-ait>
+<device-ait>/musiceventshtml/ait/issupported?brand=lg%26model=tv_2015_lm14a</device-ait>
+<device-ait>/musiceventshtml/ait/issupported?brand=vestel%26model=tv_2015_midrange</device-ait>
+<device-ait>/musiceventshtml/ait/issupported?brand=nowtv%26model=box_v2</device-ait>
+
+<h3>Red Button+ HTML</h3>
+<device-ait>/redbuttonhtml/ait/issupported?brand=lg%26model=tv_2015_lm14alite</device-ait>
+<device-ait>/redbuttonhtml/ait/issupported?brand=lg%26model=tv_2015_lm14a</device-ait>
+<device-ait>/redbuttonhtml/ait/issupported?brand=vestel%26model=tv_2015_midrange</device-ait>
+<device-ait>/redbuttonhtml/ait/issupported?brand=nowtv%26model=box_v2</device-ait>
+
+<h3>News HTML</h3>
+<device-ait>/newsontal/ait/issupported?brand=lg%26model=tv_2015_lm14alite</device-ait>
+<device-ait>/newsontal/ait/issupported?brand=lg%26model=tv_2015_lm14a</device-ait>
+<device-ait>/newsontal/ait/issupported?brand=vestel%26model=tv_2015_midrange</device-ait>
+<device-ait>/newsontal/ait/issupported?brand=nowtv%26model=box_v2</device-ait>
+
+<!-- Templates -->
+
+<template for="jira">
+    <a href="https://www.jira.co.uk/browse/{{content}}">{{content}}</a>
+</template>
+
+<template for="device-ait">
+    <p>
+        <h4>{{content}}</h4>
+        <status-button data-url="http://www.test.bbc.co.uk{{content}}" data-contains="%22ait%22">Test</status-button>
+        <status-button data-url="http://www.stage.bbc.co.uk{{content}}" data-contains="%22ait%22">Stage</status-button>
+        <status-button data-url="http://www.bbc.co.uk{{content}}" data-contains="%22ait%22">Live</status-button>
+    </p>
+</template>
