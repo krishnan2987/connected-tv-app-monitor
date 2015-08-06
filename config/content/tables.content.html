@@ -1,0 +1,49 @@
+<h1>Data Tables</h1>
+
+<template for="device-configs">
+  {{#each data}}
+  <device-config brand="{{brand}}" model="{{model}}" page-strategy="{{pageStrategy}}">
+  {{#each this.modules.modifiers}}
+    <li>{{this}}</li>
+  {{/each}}
+  </device-config>
+  {{/each}}
+</template>
+
+<template for="device-config">
+  <p><b>{{brand}}</b> : <b>{{model}}</b> : <b>{{page-strategy}}</b></p>
+  <p>{{content}}</p>
+</template>
+
+<table id="empTable" class="display" width="100%" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Page Strategy</th>
+      <th>Modifiers</th>
+    </tr>
+  </thead>
+</table>
+
+<script type="text/javascript">
+  function doTables() {
+    $('#empTable').dataTable({
+        "ajax": "/api/deviceConfigData",
+        "columns": [{
+          "data": "brand"
+        }, {
+          "data": "model"
+        }, {
+          "data": "pageStrategy"
+        }, {
+          "data": "modules.modifiers"
+        }]
+      });
+  }
+</script>
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
+<script onload="doTables()" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+<device-configs data-source-url="/api/deviceConfigData"></device-configs>

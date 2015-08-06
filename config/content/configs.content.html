@@ -1,0 +1,39 @@
+<h1>Config Monitoring</h1>
+
+<h2>TAL Launcher Configs</h2>
+<check-devices url="http://www.int.bbc.co.uk/tal-launcher/">TAL Launcher on Int</check-devices>
+<check-devices url="http://www.test.bbc.co.uk/tal-launcher/">TAL Launcher on Test</check-devices>
+<check-devices url="http://www.bbc.co.uk/tal-launcher/">TAL Launcher on Live</check-devices>
+
+<h2>CATAL Configs</h2>
+<check-devices url="http://www.int.bbc.co.uk/catal/">CATAL on Int</check-devices>
+<check-devices url="http://www.test.bbc.co.uk/catal/">CATAL on Test</check-devices>
+<check-devices url="http://www.bbc.co.uk/catal/">CATAL on Live</check-devices>
+
+<!-- Templates -->
+
+<template for="check-devices">
+  <h3>{{content}}</h3>
+  <h4>{{url}}</h4>
+  <div class="alert alert-info">
+    <device brand="google" model="chrome" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+    <device brand="vestel" model="tv_2013" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+    <device brand="sony" model="hbbtv_2014" mimetype="application/vnd.hbbtv.xhtml%2Bxml" page-strategy="hbbtv" url="{{url}}"></device>
+    <device brand="samsung" model="pe5" mimetype="text/html" page-strategy="samsungmaple" url="{{url}}"></device>
+    <device brand="samsung" model="pe7" mimetype="text/html" page-strategy="samsungmaple" url="{{url}}"></device>
+    <device brand="panasonic" model="tv_2014_midrange" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="humax" model="hdr_1000s" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="seiki" model="tv_2014" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="lg" model="tv_2013_midrange" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="vestel" model="dvr_2014" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="panasonic" model="bd_2014_highend" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+    <device brand="sharp" model="tv_2014" mimetype="text/html" page-strategy="hbbtv" url="{{url}}"></device>
+    <device brand="sony" model="bdp_2015_highend" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+    <device brand="amazon" model="firetv" mimetype="text/html" page-strategy="html5" url="{{url}}"></device>
+    <device brand="youview" model="stb_2013" mimetype="text/html" page-strategy="html5hbbtvhybrid" url="{{url}}"></device>
+  </div>
+</template>
+
+<template for="device">
+  <status-button data-url="{{url}}?brand={{brand}}%26model={{model}}" data-content-type="{{mimetype}}" data-contains="%22{{page-strategy}}%22">{{brand}} {{model}}</status-button>
+</template>

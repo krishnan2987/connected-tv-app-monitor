@@ -183,14 +183,14 @@
           }
           // Include jobs jobs by name based on an optional RegExp string
           if (include) {
-            console.log('Including', include);
+            // console.log('Including', include);
             instance.jobs = instance.jobs.filter(function(item) {
               return (new RegExp(include, 'i')).test(item.name);
             });
           }
           // Exclude jobs jobs by name based on an optional RegExp string
           if (exclude) {
-            console.log('Excluding', include);
+            // console.log('Excluding', include);
             instance.jobs = instance.jobs.filter(function(item) {
               return !(new RegExp(exclude, 'i')).test(item.name);
             });
