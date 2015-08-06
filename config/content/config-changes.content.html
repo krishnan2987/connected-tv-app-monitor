@@ -32,8 +32,8 @@
 </template>
 
 <template for="device-ait">
+    <h4>{{content}} {{brand}}-{{model}}</h4>
     <p>
-        <h4>{{content}}</h4>
         <status-button data-url="http://www.test.bbc.co.uk{{content}}?brand={{brand}}%26model={{model}}" data-contains="%22ait%22">Test</status-button>
         <status-button data-url="http://www.stage.bbc.co.uk{{content}}?brand={{brand}}%26model={{model}}" data-contains="%22ait%22">Stage</status-button>
         <status-button data-url="http://www.bbc.co.uk{{content}}?brand={{brand}}%26model={{model}}" data-contains="%22ait%22">Live</status-button>

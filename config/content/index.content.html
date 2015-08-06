@@ -31,9 +31,14 @@
 <h2>Connected TV Build Jobs</h2>
 
 <h3>TAL Launcher Jobs</h3>
-<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(build|library).*(tal-launcher)" exclude="(config|promote|tests)" label="Build jobs"></jenkins-jobs>
-<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(tal-launcher)" exclude="(build|library|config|integration-tests|sanity-tests)" label="Deployment"></jenkins-jobs>
-<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(integration-tests|sanity-tests).*(tal-launcher)" exclude="(build|library|config)" label="Tests"></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="library-tal-launcher" label="Build jobs" refresh-time="10" ></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="build-project-example-tal-launcher" refresh-time="10" ></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="deploy-tal-launcher-to-int" refresh-time="10" ></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="run-integration-tests-against-tal-launcher-on-int" refresh-time="10" ></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="deploy-tal-launcher-to-test" refresh-time="10" ></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="run-integration-tests-against-tal-launcher-on-test" refresh-time="10" ></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="deploy-tal-launcher-to-live" refresh-time="10" ></jenkins-jobs>
+<jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" include="run-sanity-tests-against-tal-launcher-on-live" refresh-time="10" ></jenkins-jobs>
 
 <h3>TAL Launcher Configs</h3>
 <jenkins-jobs data-source-url="/api/connectedTvCloudJenkins" refresh-time="10" include="(configs).*(tal-launcher)" label="Configs"></jenkins-jobs>
@@ -124,7 +129,7 @@
 
 <style for="jenkins-jobs">
   jenkins-jobs {
-    display: block;
+    display: inline-block;
   }
 
   jenkins-jobs > a {
@@ -174,6 +179,20 @@
       try {
         var list = instance.jobs;
         if (list) {
+          // Include jobs jobs by name based on an optional RegExp string
+          if (include) {
+            console.log('Including', include);
+            list = list.filter(function(item) {
+              return (new RegExp(include, 'i')).test(item.name);
+            });
+          }
+          // Exclude jobs jobs by name based on an optional RegExp string
+          if (exclude) {
+            console.log('Excluding', include);
+            list = list.filter(function(item) {
+              return !(new RegExp(exclude, 'i')).test(item.name);
+            });
+          }
           // Map Jenkins colours to Bootstrap colours
           for (key in list) {
             var item = list[key];
@@ -181,20 +200,7 @@
             item.alertType = instance.selectAlertType(item.color);
             item.url = instance.data.service + '/job/' + item.name;
           }
-          // Include jobs jobs by name based on an optional RegExp string
-          if (include) {
-            // console.log('Including', include);
-            instance.jobs = instance.jobs.filter(function(item) {
-              return (new RegExp(include, 'i')).test(item.name);
-            });
-          }
-          // Exclude jobs jobs by name based on an optional RegExp string
-          if (exclude) {
-            // console.log('Excluding', include);
-            instance.jobs = instance.jobs.filter(function(item) {
-              return !(new RegExp(exclude, 'i')).test(item.name);
-            });
-          }
+          instance.jobs = list;
         }
       } catch (e) {
         // do nothing
